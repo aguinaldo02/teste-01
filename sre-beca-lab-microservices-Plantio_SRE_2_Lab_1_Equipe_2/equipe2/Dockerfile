@@ -1,0 +1,14 @@
+FROM maven:3.8.4-openjdk-11-slim AS REAJUSTE
+
+RUN mkdir -p /equipe2
+WORKDIR /equipe2
+COPY . /equipe2
+
+RUN mvn clean install
+
+FROM openjdk:11
+RUN mkdir -p /readjustment
+WORKDIR /readjustment 
+COPY --from=reajuste /target/.jar . 
+EXPOSE 8761
+CMD ["java", "jar", "readjustment"]

@@ -1,0 +1,19 @@
+version: 
+
+services: 
+  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - 
+    volumes: 
+      - /var/app/node_modules
+      - .:/var/app/
+  app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.
+    volumes: 
+      - /var/app/
+      - .:/var/app/

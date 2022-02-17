@@ -1,0 +1,13 @@
+FROM maven:3.8.4-openjdk-11-slim AS SALARIO
+RUN mkdir -p /salary-server
+WORKDIR /salary-server
+COPY . /salary-server
+
+RUN mvn clean install
+
+FROM openjdk:11
+RUN mkdir -p /salary-server
+WORKDIR /salary-server 
+COPY --from=salario /target/salary-server.jar.original . 
+EXPOSE 8761
+CMD ["java", "jar", "salary-server"]
